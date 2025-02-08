@@ -30,10 +30,9 @@ jobs:
       - name: install 
         run: sudo apt install curl file git unzip
         
-      - name: download
+      - name: download and build
         run: |
           curl -s "https://fuchsia.googlesource.com/fuchsia/+/HEAD/scripts/bootstrap?format=TEXT" | base64 --decode | bash
           PATH=~/fuchsia/.jiri_root/bin:$PATH
+          fx set core.vim3
 
-      - name: build 
-        run: fx set core.vim3
