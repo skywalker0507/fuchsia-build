@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build fuchsia
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+
+
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+      
+      - name: install 
+        run: sudo apt install curl file git unzip
+        
+      - name: download
+        run: |
+          curl -s "https://fuchsia.googlesource.com/fuchsia/+/HEAD/scripts/bootstrap?format=TEXT" | base64 --decode | bash
+          export PATH=~/fuchsia/.jiri_root/bin:$PATH
+
+      - name: build 
+        run: fx set core.vim3
