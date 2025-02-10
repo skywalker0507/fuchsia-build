@@ -5,10 +5,7 @@ name: Build fuchsia
 on:
   workflow_dispatch:
 
-
 jobs:
-
-
 
   build:
 
@@ -38,4 +35,12 @@ jobs:
           ls -lh
           export PATH=$(pwd)/.jiri_root/bin:$PATH
           ./scripts/fx set core.vim3
+          ./scripts/fx build
+          ./scripts/fx build build-archive.zip
+
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+         name: build-archive
+         path: out/default
 
