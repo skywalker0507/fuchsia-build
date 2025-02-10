@@ -33,7 +33,11 @@ jobs:
       - name: download and build
         run: |
           curl -s "https://fuchsia.googlesource.com/fuchsia/+/HEAD/scripts/bootstrap?format=TEXT" | base64 --decode | bash
-          export PATH="$(pwd)/.jiri_root/bin:$PATH"
-          source ./scripts/fx-env.sh
+          ls -lh
+          mkdir ~/bin
+          PATH=~/bin:$PATH
+          rm -rf .git
+          cp $(pwd)/.jiri_root/bin/jiri ~/bin
+          ln -s $(pwd)/scripts/fx ~/bin
           fx set core.vim3
 
