@@ -36,7 +36,6 @@ jobs:
           ls -lh
           cd fuchsia
           ls -lh
-          rm -rf .git
           export PATH=$(pwd)/.jiri_root/bin:$PATH
           ./scripts/fx set core.vim3
 
